@@ -1,0 +1,20 @@
+---
+- name: Create network
+  docker_network:
+    driver: bridge
+    name: "{{ selenium_network }}"
+
+- name: Run selenium server
+  docker_container:
+    image: selenium/standalone-chrome:3.4.0-dysprosium
+    labels:
+      traefik.enable: "false"
+    name: "{{ selenium_hostname }}"
+    networks:
+      - name: "{{ selenium_network }}"
+    ports:
+      - "4444:4444"
+    recreate: true
+    restart_policy: always
+    state: started
+
