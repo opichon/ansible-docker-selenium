@@ -17,4 +17,5 @@
     recreate: true
     restart_policy: always
     state: started
-
+    volumes:
+      - "/dev/shm:/dev/shm"
